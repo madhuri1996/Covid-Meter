@@ -16,13 +16,21 @@ export class PatientsService {
   }
 
   getPatients() {
-    return this.http.get( this.baseUrl+Apis.getPatients);
+    return this.http.get( this.baseUrl+Apis.getPatients,{
+      headers: {
+        Authorization: 'Bearer '+localStorage.getItem('token')
+      }
+    });
   }
 
   addPatient(name: string,contactNumber:string) {
     const formData = new FormData();
     formData.append('name',name);
     formData.append('contactNumber',contactNumber);
-    return this.http.post( this.baseUrl+Apis.addPatient, formData, {});
+    return this.http.post( this.baseUrl+Apis.addPatient, formData, {
+      headers: {
+        Authorization: 'Bearer '+localStorage.getItem('token')
+      }
+    });
   }
 }
